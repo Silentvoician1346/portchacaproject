@@ -87,7 +87,7 @@ export default function Index({ oldDatas }) {
             <Grid
               templateColumns={["repeat(2, 1fr)", "repeat(10, 1fr)"]}
               gap={[6, 50]}
-              w="200px"
+              w={["200px", "700px"]}
               h="full"
             >
               {/* TAGS  */}
@@ -300,9 +300,11 @@ export default function Index({ oldDatas }) {
                       }
                       bg="#f2f5f4"
                       color="#57a3a0"
+                      _hover={{ bg: "#57a3a0", color: "#f2f5f4" }}
                       px="10px"
                       py="4px"
                       m="8px"
+                      rounded="lg"
                     >
                       {job.level}
                     </Box>
@@ -311,65 +313,6 @@ export default function Index({ oldDatas }) {
               </Grid>
 
               {/* DESIGN SECTION  */}
-
-              {/* <Button
-                onClick={
-                  level == job.level
-                    ? function removeLevel() {
-                        setLevel("");
-                        console.log("remove Level");
-                      }
-                    : function addLevel() {
-                        setLevel(job.level);
-                        console.log("add Level");
-                      }
-                }
-              >
-                {job.level}
-              </Button>
-              <Box>
-                {job.tags.slice(1).map((tag) => (
-                  <Button
-                    onClick={
-                      term.includes(tag)
-                        ? function removeTags() {
-                            let tempState = [...term];
-                            let index = tempState.indexOf(tag);
-                            if (index !== -1) {
-                              tempState.splice(index, 1);
-                            }
-                            console.log("remove");
-
-                            setTerm(tempState);
-                          }
-                        : function addTags() {
-                            let tempState = [...term];
-                            tempState.push(tag);
-                            console.log("add");
-                            setTerm(tempState);
-                          }
-                    }
-                  >
-                    {tag}
-                  </Button>
-                ))}
-              </Box> */}
-              {/* <Box>{job.company}</Box>
-              <Box>new</Box>
-              <Box>featured</Box>
-              <Box>{job.position}</Box>
-              <Box>
-                {job.posted_at} - {job.contract} - {job.location}
-              </Box>
-              <Box>{job.role} </Box>
-              {job.languages.map((language) => (
-                <Box>{language}</Box>
-              ))}
-              <Box>new</Box>
-              <Box>featured</Box>
-              <Box>{job.company}</Box> */}
-
-              {/* <Box h="10px" w="100vw" bg="black" /> */}
             </Box>
           ))}
         </Box>
