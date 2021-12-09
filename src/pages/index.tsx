@@ -57,12 +57,13 @@ export default function Index({ oldDatas }) {
 
   return (
     <Container
-      w="375px"
+      w={["375px", "1440px"]}
       h="full"
       fontFamily="Spartan, sans-serif"
       fontWeight="700"
       fontSize="15px"
       p="0px"
+      m="0px"
       bg="#f0fafb"
     >
       <Box
@@ -74,8 +75,8 @@ export default function Index({ oldDatas }) {
       >
         <Box w="5px" h="120px" />
         <HStack
-          w={level != "" || term.length != 0 ? "325px" : 0}
-          h={level != "" || term.length != 0 ? "full" : 0}
+          w={level != "" || term.length != 0 ? ["325px", "1100px"] : 0}
+          h={level != "" || term.length != 0 ? ["full", "75px"] : 0}
           bg="white"
           zIndex="modal"
           mx="auto"
@@ -83,10 +84,15 @@ export default function Index({ oldDatas }) {
           shadow="xl"
         >
           <Box m="20px">
-            <Grid templateColumns="repeat(2, 1fr)" gap={6} w="200px" h="full">
+            <Grid
+              templateColumns={["repeat(2, 1fr)", "repeat(10, 1fr)"]}
+              gap={[6, 50]}
+              w="200px"
+              h="full"
+            >
               {/* TAGS  */}
               {term.map((t) => (
-                <Flex boxSize={term == [] ? 0 : "full"}>
+                <Flex boxSize={term == [] ? 0 : ["full"]}>
                   <Box
                     color="#57a3a0"
                     bg="#f0f6f6"
@@ -144,10 +150,16 @@ export default function Index({ oldDatas }) {
             </Grid>
           </Box>
           <Spacer />
-          <Button bg="none" _hover={{}} _active={{}}>
+          <Button
+            bg="none"
+            _hover={{}}
+            _active={{}}
+            opacity={level != "" || term.length != 0 ? 100 : 0}
+          >
             <Box
               fontWeight="700"
               color="#7e8786"
+              _hover={{ color: "#57a3a0" }}
               pr="16px"
               onClick={function clear() {
                 setTerm([]);
@@ -159,11 +171,12 @@ export default function Index({ oldDatas }) {
           </Button>
         </HStack>
 
+        {/* MAIN CONTENT  */}
         <Box mt="80px" bg="#f0fafb">
           {jobs.map((job) => (
             <Box
-              w="325px"
-              h="250px"
+              w={["325px", "1100px"]}
+              h={["250px", "150px"]}
               mx="auto"
               bg="white"
               p="26px"
@@ -172,104 +185,124 @@ export default function Index({ oldDatas }) {
               pb="-250px"
               rounded="lg"
               shadow="xl"
+              borderLeftWidth={job.featured == true ? 10 : 0}
+              borderLeftColor="#57a3a0"
             >
-              <Image
-                boxSize="48px"
-                pos="relative"
-                top="-50px"
-                src="/images/photosnap.svg"
-              />
-              <Box pos="relative" top="-50px">
-                <Flex top="-100px">
-                  <Box color="#57a3a0" py="2px" rounded="full" mr="8px">
-                    {job.company}
-                  </Box>
-                  <Box
-                    bg="#57a3a0"
-                    fontSize="12px"
-                    color="white"
-                    py="5px"
-                    px="10px"
-                    rounded="full"
-                    mx="8px"
-                    opacity={job.new == true ? 100 : 0}
-                  >
-                    NEW!
-                  </Box>
-                  <Box
-                    bg="#2b3939"
-                    fontSize="12px"
-                    color="white"
-                    py="5px"
-                    px="10px"
-                    rounded="full"
-                    opacity={job.featured == true ? 100 : 0}
-                  >
-                    FEATURED
-                  </Box>
-                </Flex>
-                <Text my="8px" color="black" _hover={{ color: "#57a3a0" }}>
-                  {job.position}
-                </Text>
-                <Text fontWeight="500" my="8px" color="#8f9998;">
-                  {job.posted_at} &#8226; {job.contract} &#8226; {job.location}
-                </Text>
-                <Box w="full" h="1px" mb="16px" bg="#8f9998;" />
-                <Flex wrap="wrap">
-                  {job.tags.slice(1).map((tag) => (
+              <Grid
+                templateColumns={["repeat(1, 1fr)", "repeat(4, 1fr)"]}
+                gap={[0, 0]}
+              >
+                <Image
+                  boxSize={["48px", "86px"]}
+                  pos="relative"
+                  top={["-50px", 0]}
+                  src="/images/photosnap.svg"
+                  mr="120px"
+                />
+
+                <Box pos="relative" top={["-50px", 0]} mr="40px">
+                  <Flex top="-100px">
+                    <Box color="#57a3a0" py="2px" rounded="full" mr="8px">
+                      {job.company}
+                    </Box>
+                    <Box
+                      bg="#57a3a0"
+                      fontSize="12px"
+                      color="white"
+                      py="5px"
+                      px="10px"
+                      rounded="full"
+                      mx="8px"
+                      opacity={job.new == true ? 100 : 0}
+                    >
+                      NEW!
+                    </Box>
+                    <Box
+                      bg="#2b3939"
+                      fontSize="12px"
+                      color="white"
+                      py="5px"
+                      px="10px"
+                      rounded="full"
+                      opacity={job.featured == true ? 100 : 0}
+                    >
+                      FEATURED
+                    </Box>
+                  </Flex>
+                  <Text my="8px" color="black" _hover={{ color: "#57a3a0" }}>
+                    {job.position}
+                  </Text>
+                  <Text fontWeight="500" my="8px" color="#8f9998;">
+                    {job.posted_at} &#8226; {job.contract} &#8226;{" "}
+                    {job.location}
+                  </Text>
+                </Box>
+                <Box
+                  w={["full", "0px"]}
+                  h="1px"
+                  mb="16px"
+                  bg="#8f9998"
+                  pos="relative"
+                  top={["-50px", 0]}
+                />
+
+                <Box pos="relative" top={["-50px", 0]} my="auto">
+                  <Flex wrap="wrap" w={["250px", "700px"]}>
+                    {job.tags.slice(1).map((tag) => (
+                      <Box
+                        onClick={
+                          term.includes(tag)
+                            ? function removeTags() {
+                                let tempState = [...term];
+                                let index = tempState.indexOf(tag);
+                                if (index !== -1) {
+                                  tempState.splice(index, 1);
+                                }
+                                console.log("remove");
+
+                                setTerm(tempState);
+                              }
+                            : function addTags() {
+                                let tempState = [...term];
+                                tempState.push(tag);
+                                console.log("add");
+                                setTerm(tempState);
+                              }
+                        }
+                        bg="#f2f5f4"
+                        color="#57a3a0"
+                        _hover={{ bg: "#57a3a0", color: "#f2f5f4" }}
+                        px="10px"
+                        py="4px"
+                        m="8px"
+                        rounded="lg"
+                      >
+                        {tag}
+                      </Box>
+                    ))}
                     <Box
                       onClick={
-                        term.includes(tag)
-                          ? function removeTags() {
-                              let tempState = [...term];
-                              let index = tempState.indexOf(tag);
-                              if (index !== -1) {
-                                tempState.splice(index, 1);
-                              }
-                              console.log("remove");
-
-                              setTerm(tempState);
+                        level == job.level
+                          ? function removeLevel() {
+                              setLevel("");
+                              console.log("remove Level");
                             }
-                          : function addTags() {
-                              let tempState = [...term];
-                              tempState.push(tag);
-                              console.log("add");
-                              setTerm(tempState);
+                          : function addLevel() {
+                              setLevel(job.level);
+                              console.log("add Level");
                             }
                       }
                       bg="#f2f5f4"
                       color="#57a3a0"
-                      _hover={{ bg: "#57a3a0", color: "#f2f5f4" }}
                       px="10px"
                       py="4px"
                       m="8px"
-                      rounded="lg"
                     >
-                      {tag}
+                      {job.level}
                     </Box>
-                  ))}
-                  <Box
-                    onClick={
-                      level == job.level
-                        ? function removeLevel() {
-                            setLevel("");
-                            console.log("remove Level");
-                          }
-                        : function addLevel() {
-                            setLevel(job.level);
-                            console.log("add Level");
-                          }
-                    }
-                    bg="#f2f5f4"
-                    color="#57a3a0"
-                    px="10px"
-                    py="4px"
-                    m="8px"
-                  >
-                    {job.level}
-                  </Box>
-                </Flex>
-              </Box>
+                  </Flex>
+                </Box>
+              </Grid>
 
               {/* DESIGN SECTION  */}
 
