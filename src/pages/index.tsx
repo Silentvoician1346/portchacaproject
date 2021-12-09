@@ -150,7 +150,7 @@ export default function Index({ oldDatas }) {
             </Grid>
           </Box>
           <Spacer />
-          <Button
+          <Box
             bg="none"
             _hover={{}}
             _active={{}}
@@ -168,7 +168,7 @@ export default function Index({ oldDatas }) {
             >
               Clear
             </Box>
-          </Button>
+          </Box>
         </HStack>
 
         {/* MAIN CONTENT  */}
@@ -202,7 +202,13 @@ export default function Index({ oldDatas }) {
 
                 <Box pos="relative" top={["-50px", 0]} mr="40px">
                   <Flex top="-100px">
-                    <Box color="#57a3a0" py="2px" rounded="full" mr="8px">
+                    <Box
+                      w="100px"
+                      color="#57a3a0"
+                      py="2px"
+                      rounded="full"
+                      mr="8px"
+                    >
                       {job.company}
                     </Box>
                     <Box
